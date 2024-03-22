@@ -22,8 +22,70 @@
 
 <body>
 
-<!-- Add your site or application content here -->
-<p>Hello world! This is HTML5 Boilerplate.</p>
+<div class="container">
+  <h3 class="bold">Avaliação de Andamento</h3>
+  <h4 class="bold">Curso: Ciência da Computação</h4>
+  <section id="generalInformation" class="section card card-panel">
+    <span class="card-title bold">Informações gerais</span>
+    <div class="row">
+      <div class="input-field col s12 m6">
+        <input id="studentName" type="text" class="validate"/>
+        <label for="studentName">Nome do aluno</label>
+      </div>
+      <div class="input-field col s12 m6">
+        <input id="professorName" type="text" class="validate"/>
+        <label for="professorName">Nome do avaliador</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12 m6 mt-2 mb-2">
+        <div class="col s6">
+          <label class="black-text">
+            <input class="with-gap" name="period" type="radio" value="1"/>
+            <span>1º Semestre</span>
+          </label>
+        </div>
+        <div class="col s6">
+          <label class="black-text">
+            <input class="with-gap" name="period" type="radio" value="2"/>
+            <span>2º Semestre</span>
+          </label>
+        </div>
+      </div>
+      <div class="input-field col s12 m3">
+        <input id="date" type="text" class="datepicker"/>
+        <label for="date">Data</label>
+      </div>
+      <div class="input-field col s12 m3">
+        <input id="time" type="text" class="timepicker"/>
+        <label for="time">Horário</label>
+      </div>
+    </div>
+  </section>
+  <section id="evaluation" class="section card card-panel">
+    <span class="card-title bold">Avaliação</span>
+    <div class="row">
+      <div class="range-field col s12 m4 mt-1 mb-1">
+        <label for="relevanceAndOriginality" class="black-text">Relevância e originalidade</label>
+        <input class="mt-3" type="range" id="relevanceAndOriginality" min="0" max="2" step="0.1"/>
+      </div>
+      <div class="range-field col s12 m4 mt-1 mb-1">
+        <label for="contentQuality" class="black-text">Qualidade do conteúdo</label>
+        <input class="mt-3" type="range" id="contentQuality" min="0" max="2" step="0.1"/>
+      </div>
+      <div class="range-field col s12 m4 mt-1 mb-1">
+        <label for="presentation" class="black-text">Apresentação</label>
+        <input class="mt-3" type="range" id="presentation" min="0" max="2" step="0.1"/>
+      </div>
+    </div>
+    <div class="row">
+      <label for="finalValue" class="black-text bold">Nota final: </label>
+      <span id="finalValue"></span>
+    </div>
+  </section>
+</div>
+
+
 <script src="js/app.js"></script>
 
 <!--  Materialize-->
