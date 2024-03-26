@@ -20,4 +20,10 @@ $(document).ready(function () {
       done: "Ok"
     }
   });
+  $('#relevanceAndOriginality, #contentQuality, #presentation').change((e) => {
+    console.log(e)
+    const elementId = e.target.id
+    const value = $(`#${elementId} + .thumb .value`).text();
+    $(`#${elementId}Value`).text(value);
+  });
 });

@@ -96,7 +96,7 @@ input[type=range] + .thumb.active {
 }
 
 input[type=range] + .thumb .value {
-  color: #000 !important;
+  color: transparent !important;
   font-size: 12px !important;
   margin-top: 6px !important;
 }
