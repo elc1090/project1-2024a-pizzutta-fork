@@ -35,6 +35,35 @@ h5 {
   box-shadow: 0 1px 0 0 #1a237e !important;
 }
 
+/* date and time picker color */
+.datepicker-date-display, .timepicker-digital-display {
+  background-color: #1a237e !important;
+}
+
+.datepicker-table td.is-today {
+  color: #1a237e !important;
+}
+
+.datepicker-table td.is-selected {
+  background-color: #1a237e !important;
+}
+
+.datepicker-cancel, .datepicker-clear, .datepicker-today, .datepicker-done, .timepicker-close {
+  color: #1a237e !important;
+}
+
+.timepicker-canvas-bg {
+  fill: #c5cae9 !important;
+}
+
+.timepicker-canvas line {
+  stroke: #1a237e !important;
+}
+
+.timepicker-canvas-bearing {
+  fill: #1a237e !important;
+}
+
 /* checkbox checked color */
 [type="radio"]:checked + span::after, [type="radio"].with-gap:checked + span::after {
   background-color: #1a237e !important;
