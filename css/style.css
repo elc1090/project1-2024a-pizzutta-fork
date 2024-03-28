@@ -24,6 +24,10 @@ h5 {
   font-size: 1rem !important;
 }
 
+.btn {
+  background-color: #1a237e !important;
+}
+
 /* label focus color */
 .input-field input[type=text]:focus + label {
   color: #1a237e !important;
@@ -63,6 +67,10 @@ h5 {
 
 .timepicker-canvas-bearing {
   fill: #1a237e !important;
+}
+
+.file-field .btn {
+  float: none !important;
 }
 
 /* checkbox checked color */
@@ -108,6 +116,18 @@ input[type=range] + .thumb.active .value {
 
 #evaluation label {
   font-size: 1rem;
+}
+
+#signatureCanvas, #signatureSelect, #signaturePreview {
+  display: none;
+}
+
+#signatureCanvas {
+  border: solid 1px #000;
+}
+
+#signaturePreview {
+  max-width: 15rem;
 }
 
 .bold {

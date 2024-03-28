@@ -25,7 +25,19 @@ $(document).ready(function () {
     const value = $(`#${elementId} + .thumb .value`).text()
     $(`#${elementId}Value`).text(value)
     calculateFinalValue()
-  });
+  })
+  $('input[type=radio][name=signatureType]').change(handleSignatureTypeChange)
+  $('#signatureField').change(() => {
+    const file = $('#signatureField').prop("files")[0]
+    const reader = new FileReader();
+    if (file) {
+      reader.readAsDataURL(file)
+      reader.addEventListener("load", () => {
+        $('#signaturePreview').attr("src", reader.result)
+        $('#signaturePreview').show()
+      }, false);
+    }
+  })
 });
 
 const calculateFinalValue = () => {
@@ -35,5 +47,21 @@ const calculateFinalValue = () => {
   if (relevanceAndOriginality && contentQuality && presentation) {
     const finalValue = Number(relevanceAndOriginality) + Number(contentQuality) + Number(presentation)
     $(`#finalValue`).text(finalValue.toFixed(1))
+  }
+}
+
+const handleSignatureTypeChange = () => {
+  const type = $('input[name=signatureType]:checked').val()
+  switch (type) {
+    case "DRAW": {
+      $('#signatureCanvas').show()
+      $('#signatureSelect').hide()
+      break;
+    }
+    case "SELECT": {
+      $('#signatureSelect').show()
+      $('#signatureCanvas').hide()
+      break;
+    }
   }
 }

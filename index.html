@@ -92,18 +92,34 @@
   <section id="signature" class="section card card-panel">
     <span class="card-title bold">Assinatura</span>
     <div class="row">
-      <div class="col s12 m6 mt-2 mb-2">
+      <div class="col s12 m6 mt-2">
         <div class="col s6">
           <label class="black-text">
-            <input class="with-gap" name="signatureType" type="radio" value="1"/>
+            <input class="with-gap" name="signatureType" type="radio" value="DRAW"/>
             <span>Desenhar</span>
           </label>
         </div>
         <div class="col s6">
           <label class="black-text">
-            <input class="with-gap" name="signatureType" type="radio" value="2"/>
+            <input class="with-gap" name="signatureType" type="radio" value="SELECT"/>
             <span>Selecionar</span>
           </label>
+        </div>
+      </div>
+    </div>
+    <div id="signatureWrapper" class="row">
+      <div class="col s12 center">
+        <canvas id="signatureCanvas"></canvas>
+        <div id="signatureSelect" class="file-field input-field">
+          <div class="row">
+            <div class="col s12">
+              <img id="signaturePreview" src="#">
+            </div>
+          </div>
+          <div class="btn">
+            <span>Selecione o arquivo</span>
+            <input id="signatureField" type="file" accept="image/*">
+          </div>
         </div>
       </div>
     </div>
