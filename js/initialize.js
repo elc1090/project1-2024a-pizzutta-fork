@@ -11,7 +11,7 @@ $(document).ready(function () {
       weekdaysShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
       weekdaysAbbrev: ["D", "S", "T", "Q", "Q", "S", "S"]
     }
-  });
+  })
   $('.timepicker').timepicker({
     twelveHour: false,
     i18n: {
@@ -19,11 +19,21 @@ $(document).ready(function () {
       clear: "Limpar",
       done: "Ok"
     }
-  });
+  })
   $('#relevanceAndOriginality, #contentQuality, #presentation').change((e) => {
-    console.log(e)
     const elementId = e.target.id
-    const value = $(`#${elementId} + .thumb .value`).text();
-    $(`#${elementId}Value`).text(value);
+    const value = $(`#${elementId} + .thumb .value`).text()
+    $(`#${elementId}Value`).text(value)
+    calculateFinalValue()
   });
 });
+
+const calculateFinalValue = () => {
+  const relevanceAndOriginality = $(`#relevanceAndOriginalityValue`).text()
+  const contentQuality = $(`#contentQualityValue`).text()
+  const presentation = $(`#presentationValue`).text()
+  if (relevanceAndOriginality && contentQuality && presentation) {
+    const finalValue = Number(relevanceAndOriginality) + Number(contentQuality) + Number(presentation)
+    $(`#finalValue`).text(finalValue.toFixed(1))
+  }
+}
