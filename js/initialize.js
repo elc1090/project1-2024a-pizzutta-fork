@@ -1,3 +1,5 @@
+const signature = new Signature()
+
 $(document).ready(function () {
   $('.datepicker').datepicker({
     format: "dd/mm/yyyy",
@@ -12,6 +14,7 @@ $(document).ready(function () {
       weekdaysAbbrev: ["D", "S", "T", "Q", "Q", "S", "S"]
     }
   })
+
   $('.timepicker').timepicker({
     twelveHour: false,
     i18n: {
@@ -20,24 +23,17 @@ $(document).ready(function () {
       done: "Ok"
     }
   })
+
   $('#relevanceAndOriginality, #contentQuality, #presentation').change((e) => {
     const elementId = e.target.id
     const value = $(`#${elementId} + .thumb .value`).text()
     $(`#${elementId}Value`).text(value)
     calculateFinalValue()
   })
+
   $('input[type=radio][name=signatureType]').change(handleSignatureTypeChange)
-  $('#signatureField').change(() => {
-    const file = $('#signatureField').prop("files")[0]
-    const reader = new FileReader();
-    if (file) {
-      reader.readAsDataURL(file)
-      reader.addEventListener("load", () => {
-        $('#signaturePreview').attr("src", reader.result)
-        $('#signaturePreview').show()
-      }, false);
-    }
-  })
+
+  signature.initialize()
 });
 
 const calculateFinalValue = () => {
