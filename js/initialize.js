@@ -50,13 +50,13 @@ const handleSignatureTypeChange = () => {
   const type = $('input[name=signatureType]:checked').val()
   switch (type) {
     case "DRAW": {
-      $('#signatureCanvas').show()
+      $('#signatureCanvasWrapper').show()
       $('#signatureSelect').hide()
       break;
     }
     case "SELECT": {
       $('#signatureSelect').show()
-      $('#signatureCanvas').hide()
+      $('#signatureCanvasWrapper').hide()
       break;
     }
   }

@@ -118,7 +118,7 @@ input[type=range] + .thumb.active .value {
   font-size: 1rem;
 }
 
-#signatureCanvas, #signatureSelect, #signaturePreview {
+#signatureCanvasWrapper, #signatureSelect, #signaturePreview {
   display: none;
 }
 
