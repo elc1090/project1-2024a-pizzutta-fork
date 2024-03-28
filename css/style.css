@@ -24,8 +24,8 @@ h5 {
   font-size: 1rem !important;
 }
 
-.btn {
-  background-color: #1a237e !important;
+.btn-flat:hover {
+  background-color: transparent !important;
 }
 
 /* label focus color */
