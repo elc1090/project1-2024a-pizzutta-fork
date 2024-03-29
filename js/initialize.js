@@ -1,4 +1,5 @@
 const signature = new Signature()
+const generatePDF = new GeneratePDF()
 
 $(document).ready(function () {
   $('.datepicker').datepicker({
