@@ -54,7 +54,13 @@ const Signature = class {
     this.ctx.stroke();
   }
 
-  clear = ()=>{
-    this.ctx.clearRect(0,0, this.canvas.width, this.canvas.height)
+  clear = () => {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+  }
+
+  isBlank = () => {
+    return !this.canvas.getContext('2d')
+      .getImageData(0, 0, this.canvas.width, this.canvas.height).data
+      .some(channel => channel !== 0);
   }
 }

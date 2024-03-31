@@ -1,5 +1,6 @@
 const signature = new Signature()
 const generatePDF = new GeneratePDF()
+const validation = new Validation()
 
 $(document).ready(function () {
   $('.datepicker').datepicker({
@@ -35,6 +36,7 @@ $(document).ready(function () {
   $('input[type=radio][name=signatureType]').change(handleSignatureTypeChange)
 
   signature.initialize()
+  validation.initialize()
 });
 
 const calculateFinalValue = () => {

@@ -48,7 +48,9 @@ const GeneratePDF = class {
   }
 
   open = () => {
-    pdfMake.createPdf(this.getDefinition()).open();
+    if ($('#evaluationForm').valid()) {
+      pdfMake.createPdf(this.getDefinition()).open();
+    }
   }
 
 }
