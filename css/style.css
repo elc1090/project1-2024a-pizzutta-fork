@@ -130,6 +130,10 @@ input[type=range] + .thumb.active .value {
   max-width: 15rem;
 }
 
+.btn-block {
+  width: 100% !important;
+}
+
 .bold {
   font-weight: bold !important;
 }
