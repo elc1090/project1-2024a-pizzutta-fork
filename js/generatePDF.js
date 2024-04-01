@@ -35,9 +35,45 @@ const GeneratePDF = class {
             `Professor: ${data.generalInformation.professorName}\n`,
             `Data: ${data.generalInformation.date}\n`,
             `Horário: ${data.generalInformation.time}\n`,
-            `${data.generalInformation.period}º Semestre`
+            `${data.generalInformation.period}º Semestre\n`,
+            "\n\n\n"
           ],
           style: "normal"
+        },
+        {
+          columns: [
+            {width: "*", text: ""},
+            {
+              width: "auto",
+              table: {
+                headerRows: 1,
+                body: [
+                  [
+                    {text: "Critério", style: "tableHeader", noWrap: true},
+                    {text: "Nota", style: "tableHeader", noWrap: true}
+                  ],
+                  [
+                    {text: "Relevância e originalidade", style: "tableBody"},
+                    {text: data.evaluation.relevanceAndOriginality, style: "tableBody"}
+                  ],
+                  [
+                    {text: "Qualidade do conteúdo", style: "tableBody"},
+                    {text: data.evaluation.contentQuality, style: "tableBody"}
+                  ],
+                  [
+                    {text: "Apresentação", style: "tableBody"},
+                    {text: data.evaluation.presentation, style: "tableBody"}
+                  ],
+                  [
+                    {text: "Nota final", style: "tableBody"},
+                    {text: data.evaluation.finalValue, style: "tableBody"}
+                  ]
+                ],
+                alignment: "center"
+              }
+            },
+            {width: "*", text: ""},
+          ]
         }
       ],
       styles: {
@@ -59,6 +95,17 @@ const GeneratePDF = class {
           fontSize: 12,
           alignment: "justify",
           lineHeight: 1.5
+        },
+        tableHeader: {
+          font: "Times",
+          fontSize: 12,
+          bold: true,
+          margin: 5
+        },
+        tableBody: {
+          font: "Times",
+          fontSize: 12,
+          margin: 5
         }
       }
     }
