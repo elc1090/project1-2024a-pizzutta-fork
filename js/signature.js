@@ -1,5 +1,7 @@
 const Signature = class {
 
+  type = "";
+
   canvas = $('#signatureCanvas')[0];
   ctx = this.canvas.getContext('2d');
 
@@ -24,6 +26,33 @@ const Signature = class {
         }
       })
     });
+  }
+
+  handleSignatureTypeChange = () => {
+    this.type = $('input[name=signatureType]:checked').val()
+    switch (this.type) {
+      case "DRAW": {
+        $('#signatureCanvasWrapper').show()
+        $('#signatureSelect').hide()
+        break;
+      }
+      case "SELECT": {
+        $('#signatureSelect').show()
+        $('#signatureCanvasWrapper').hide()
+        break;
+      }
+    }
+  }
+
+  getSignatureImage = () => {
+    switch (this.type) {
+      case "DRAW": {
+        return this.canvas.toDataURL("image/png")
+      }
+      case "SELECT": {
+        return $('#signaturePreview').attr("src")
+      }
+    }
   }
 
   getPosition = (event) => {
@@ -59,7 +88,7 @@ const Signature = class {
   }
 
   isBlank = () => {
-    return !this.canvas.getContext('2d')
+    return !this.ctx
       .getImageData(0, 0, this.canvas.width, this.canvas.height).data
       .some(channel => channel !== 0);
   }

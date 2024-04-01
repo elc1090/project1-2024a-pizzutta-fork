@@ -33,7 +33,7 @@ $(document).ready(function () {
     calculateFinalValue()
   })
 
-  $('input[type=radio][name=signatureType]').change(handleSignatureTypeChange)
+  $('input[type=radio][name=signatureType]').change(signature.handleSignatureTypeChange)
 
   signature.initialize()
   validation.initialize()
@@ -46,21 +46,5 @@ const calculateFinalValue = () => {
   if (relevanceAndOriginality && contentQuality && presentation) {
     const finalValue = Number(relevanceAndOriginality) + Number(contentQuality) + Number(presentation)
     $(`#finalValue`).text(finalValue.toFixed(1))
-  }
-}
-
-const handleSignatureTypeChange = () => {
-  const type = $('input[name=signatureType]:checked').val()
-  switch (type) {
-    case "DRAW": {
-      $('#signatureCanvasWrapper').show()
-      $('#signatureSelect').hide()
-      break;
-    }
-    case "SELECT": {
-      $('#signatureSelect').show()
-      $('#signatureCanvasWrapper').hide()
-      break;
-    }
   }
 }

@@ -126,7 +126,7 @@ const GeneratePDF = class {
         presentation: Number($(`#presentationValue`).text()),
         finalValue: Number($(`#finalValue`).text())
       },
-      signatureType: $('input[name=signatureType]:checked').val()
+      signature: signature.getSignatureImage()
     }
   }
 
