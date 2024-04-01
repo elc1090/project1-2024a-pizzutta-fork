@@ -74,6 +74,19 @@ const GeneratePDF = class {
             },
             {width: "*", text: ""},
           ]
+        },
+        {text: "\n\n\n\n", style: "normal"},
+        {
+          image: data.signature,
+          width: 150,
+          style: "center"
+        },
+        {
+          text: [
+            "___________________________________\n",
+            "Avaliador"
+          ],
+          style: "center"
         }
       ],
       styles: {
@@ -106,6 +119,12 @@ const GeneratePDF = class {
           font: "Times",
           fontSize: 12,
           margin: 5
+        },
+        center: {
+          font: "Times",
+          fontSize: 12,
+          alignment: "center",
+          lineHeight: 1.5
         }
       }
     }
