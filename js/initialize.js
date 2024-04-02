@@ -48,3 +48,16 @@ const calculateFinalValue = () => {
     $(`#finalValue`).text(finalValue.toFixed(1))
   }
 }
+
+const resetAllFields = () => {
+  $(`#relevanceAndOriginalityValue`).text("")
+  $(`#contentQualityValue`).text("")
+  $(`#presentationValue`).text("")
+  $(`#finalValue`).text("")
+
+  signature.clearCanvas()
+  signature.clearPreview()
+  $('#signatureCanvasWrapper').hide()
+  $('#signaturePreview').hide()
+  $('#signatureSelect').hide()
+}
