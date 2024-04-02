@@ -78,7 +78,7 @@ const resetAllFields = () => {
 const copyLink = () => {
   const data = generatePDF.getData()
 
-  const link = `index.html?studentName=${encodeURIComponent(data.generalInformation.studentName)}`
+  const link = `${window.location.href}?studentName=${encodeURIComponent(data.generalInformation.studentName)}`
     + `&professorName=${encodeURIComponent(data.generalInformation.professorName)}`
     + `&period=${data.generalInformation.period}`
     + `&date=${encodeURIComponent(data.generalInformation.date)}`
