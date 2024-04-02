@@ -13,7 +13,22 @@ const Signature = class {
       $(this.canvas).mousedown(this.startPainting)
       $(this.canvas).mouseup(this.stopPainting)
       $(this.canvas).mousemove(this.sketch)
+      $(this.canvas).on("touchend", this.startPainting)
+      $(this.canvas).on("touchstart", (event) => {
+        event.preventDefault()
+        event.stopPropagation()
+
+        const touch = event.touches[0];
+        const mouseEvent = new MouseEvent("mousedown", {
+          clientX: touch.clientX,
+          clientY: touch.clientY
+        });
+        this.canvas.dispatchEvent(mouseEvent);
+      })
       $(this.canvas).on("touchmove", (event) => {
+        event.preventDefault()
+        event.stopPropagation()
+
         const touch = event.touches[0];
         const mouseEvent = new MouseEvent("mousemove", {
           clientX: touch.clientX,
@@ -78,9 +93,6 @@ const Signature = class {
   }
 
   sketch = (event) => {
-    event.preventDefault()
-    event.stopPropagation()
-
     if (!this.painting) return;
 
     this.ctx.beginPath();
