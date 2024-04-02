@@ -13,6 +13,14 @@ const Signature = class {
       $(this.canvas).mousedown(this.startPainting)
       $(this.canvas).mouseup(this.stopPainting)
       $(this.canvas).mousemove(this.sketch)
+      $(this.canvas).on("touchmove", (event) => {
+        const touch = event.touches[0];
+        const mouseEvent = new MouseEvent("mousemove", {
+          clientX: touch.clientX,
+          clientY: touch.clientY
+        });
+        this.canvas.dispatchEvent(mouseEvent);
+      })
 
       $('#signatureField').change(() => {
         const file = $('#signatureField').prop("files")[0]
@@ -70,6 +78,9 @@ const Signature = class {
   }
 
   sketch = (event) => {
+    event.preventDefault()
+    event.stopPropagation()
+
     if (!this.painting) return;
 
     this.ctx.beginPath();
