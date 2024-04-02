@@ -18,23 +18,23 @@ const Signature = class {
         event.preventDefault()
         event.stopPropagation()
 
-        const touch = event.touches[0];
+        const touch = event.touches[0]
         const mouseEvent = new MouseEvent("mousedown", {
-          clientX: touch.clientX,
-          clientY: touch.clientY
-        });
-        this.canvas.dispatchEvent(mouseEvent);
+          clientX: touch.pageX,
+          clientY: touch.pageY
+        })
+        this.canvas.dispatchEvent(mouseEvent)
       })
       $(this.canvas).on("touchmove", (event) => {
         event.preventDefault()
         event.stopPropagation()
 
-        const touch = event.touches[0];
+        const touch = event.touches[0]
         const mouseEvent = new MouseEvent("mousemove", {
-          clientX: touch.clientX,
-          clientY: touch.clientY
-        });
-        this.canvas.dispatchEvent(mouseEvent);
+          clientX: touch.pageX,
+          clientY: touch.pageY
+        })
+        this.canvas.dispatchEvent(mouseEvent)
       })
 
       $('#signatureField').change(() => {
