@@ -13,26 +13,25 @@ const Signature = class {
       $(this.canvas).mousedown(this.startPainting)
       $(this.canvas).mouseup(this.stopPainting)
       $(this.canvas).mousemove(this.sketch)
-      $(this.canvas).on("touchend", this.startPainting)
-      $(this.canvas).on("touchstart", (event) => {
-        event.preventDefault()
-        event.stopPropagation()
 
+      $(this.canvas).on("touchstart touchend touchmove", (event) => event.preventDefault())
+      $(this.canvas).on("touchend", () => {
+        const mouseEvent = new MouseEvent("mouseup", {});
+        this.canvas.dispatchEvent(mouseEvent);
+      })
+      $(this.canvas).on("touchstart", (event) => {
         const touch = event.touches[0]
         const mouseEvent = new MouseEvent("mousedown", {
-          clientX: touch.pageX,
-          clientY: touch.pageY
+          clientX: touch.clientX,
+          clientY: touch.clientY
         })
         this.canvas.dispatchEvent(mouseEvent)
       })
       $(this.canvas).on("touchmove", (event) => {
-        event.preventDefault()
-        event.stopPropagation()
-
         const touch = event.touches[0]
         const mouseEvent = new MouseEvent("mousemove", {
-          clientX: touch.pageX,
-          clientY: touch.pageY
+          clientX: touch.clientX,
+          clientY: touch.clientY
         })
         this.canvas.dispatchEvent(mouseEvent)
       })
@@ -81,6 +80,7 @@ const Signature = class {
   getPosition = (event) => {
     this.position.x = event.clientX - this.canvas.getBoundingClientRect().left;
     this.position.y = event.clientY - this.canvas.getBoundingClientRect().top;
+    console.log(this.position)
   }
 
   startPainting = (event) => {
