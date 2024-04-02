@@ -14,27 +14,9 @@ const Signature = class {
       $(this.canvas).mouseup(this.stopPainting)
       $(this.canvas).mousemove(this.sketch)
 
-      $(this.canvas).on("touchstart touchend touchmove", (event) => event.preventDefault())
-      $(this.canvas).on("touchend", () => {
-        const mouseEvent = new MouseEvent("mouseup", {});
-        this.canvas.dispatchEvent(mouseEvent);
-      })
-      $(this.canvas).on("touchstart", (event) => {
-        const touch = event.touches[0]
-        const mouseEvent = new MouseEvent("mousedown", {
-          clientX: touch.clientX,
-          clientY: touch.clientY
-        })
-        this.canvas.dispatchEvent(mouseEvent)
-      })
-      $(this.canvas).on("touchmove", (event) => {
-        const touch = event.touches[0]
-        const mouseEvent = new MouseEvent("mousemove", {
-          clientX: touch.clientX,
-          clientY: touch.clientY
-        })
-        this.canvas.dispatchEvent(mouseEvent)
-      })
+      $(this.canvas).on("touchend", (event) => this.handleTouch(event, "mouseup"))
+      $(this.canvas).on("touchstart", (event) => this.handleTouch(event, "mousedown"))
+      $(this.canvas).on("touchmove", (event) => this.handleTouch(event, "mousemove"))
 
       $('#signatureField').change(() => {
         const file = $('#signatureField').prop("files")[0]
@@ -66,6 +48,16 @@ const Signature = class {
     }
   }
 
+  handleTouch = (event, type) => {
+    event.preventDefault()
+    const touch = event.touches[0]
+    const mouseEvent = new MouseEvent(type, {
+      clientX: touch.clientX,
+      clientY: touch.clientY
+    })
+    this.canvas.dispatchEvent(mouseEvent)
+  }
+
   getSignatureImage = () => {
     switch (this.type) {
       case "DRAW": {
@@ -80,7 +72,6 @@ const Signature = class {
   getPosition = (event) => {
     this.position.x = event.clientX - this.canvas.getBoundingClientRect().left;
     this.position.y = event.clientY - this.canvas.getBoundingClientRect().top;
-    console.log(this.position)
   }
 
   startPainting = (event) => {
