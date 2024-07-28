@@ -134,6 +134,22 @@ input[type=range] + .thumb.active .value {
   max-width: 15rem;
 }
 
+/* Ensures the canvas stays within its parent and is centered */
+.canvas-container {
+  display: inline-block;
+  max-width: 100%; /* Make sure it doesn't overflow its container */
+  text-align: center; /* Center the canvas horizontally */
+  position: relative; /* Allows for positioning the canvas */
+}
+
+canvas {
+  width: 100%; /* Make the canvas responsive */
+  height: auto; /* Maintain aspect ratio */
+  border: 1px solid #000; /* Optional: border for visibility */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+
 .btn-block {
   width: 100% !important;
 }
