@@ -123,7 +123,7 @@ $(document).ready(function () {
 
 
 
-  $('#presentationRubric1, #presentationRubric2, #presentationRubric3, #contentRubric1, #contentRubric2, #contentRubric3, #contentRubric4').change((e) => {
+  $('#presentationRubric1, #presentationRubric2, #presentationRubric3').change((e) => {
     const elementId = e.target.id
     const value = $(`#${elementId} + .thumb .value`).text()
     $(`#${elementId}Value`).text(value)
@@ -156,22 +156,15 @@ const calculateFinalValue = () => {
   const presentationRubric1 = $(`#presentationRubric1Value`).text()
   const presentationRubric2 = $(`#presentationRubric2Value`).text()
   const presentationRubric3 = $(`#presentationRubric3Value`).text()
-  const contentRubric1 = $(`#contentRubric1Value`).text()
-  const contentRubric2 = $(`#contentRubric2Value`).text()
-  const contentRubric3 = $(`#contentRubric3Value`).text()
-  const contentRubric4 = $(`#contentRubric4Value`).text()
+
 
   const currentTimestamp = Date.now()
-  console.log(contentRubric4)
+
   
   // if (presentationRubric1 && presentationRubric2 && presentationRubric3 && contentRubric1 && contentRubric2 && contentRubric3 && contentRubric4) {
     const finalValue = Number(presentationRubric1) +
       Number(presentationRubric2) +
-      Number(presentationRubric3) +
-      Number(contentRubric1) +
-      Number(contentRubric2) +
-      Number(contentRubric3) +
-      Number(contentRubric4)
+      Number(presentationRubric3) 
     $(`#finalValue`).text(finalValue.toFixed(1))
     
   // }
@@ -194,10 +187,6 @@ const resetAllFields = () => {
   $(`#presentationRubric1`).text("")
   $(`#presentationRubric2`).text("")
   $(`#presentationRubric3`).text("")
-  $(`#contentRubric1`).text("")
-  $(`#contentRubric2`).text("")
-  $(`#contentRubric3`).text("")
-  $(`#contentRubric4`).text("")
   $(`#finalValue`).text("")
 
   signature.clearCanvas()
