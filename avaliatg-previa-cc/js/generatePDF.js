@@ -65,7 +65,7 @@ const GeneratePDF = class {
                     {text: data.evaluation.presentationRubric3, style: "tableBody"}
                   ],
                   [
-                    {text: "Nota final", style: "tableBody"},
+                    {text: "Nota de andamento", style: "tableBody"},
                     {text: data.evaluation.finalValue, style: "tableBody"}
                   ]
                 ],
