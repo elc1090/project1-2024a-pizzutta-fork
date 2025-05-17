@@ -26,16 +26,17 @@ const GeneratePDF = class {
           style: "header"
         },
         {
-          text: ["FICHA DE AVALIAÇÃO DE TRABALHO DE GRADUAÇÃO\n", "\n\n\n"],
+          text: ["FICHA DE AVALIAÇÃO DE TRABALHO DE GRADUAÇÃO\n", 
+                 "SESSÃO PÚBLICA DE ANDAMENTO\n","\n\n\n"],
           style: "title"
         },
         {
           text: [
+            `${data.generalInformation.period}º Semestre\n`,            
             `Estudante: ${data.generalInformation.studentName}\n`,
             `Avaliador(a): ${data.generalInformation.professorName}\n`,
             `Data: ${data.generalInformation.date}\n`,
             `Horário: ${data.generalInformation.time}\n`,
-            `${data.generalInformation.period}º Semestre\n`,
             "\n\n"
           ],
           style: "normal"
@@ -186,7 +187,7 @@ const GeneratePDF = class {
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
           try {
             await navigator.share({
-              title: 'Ficha de Avaliação de TCC',
+              title: 'Ficha de Avaliação de Andamento de TCC',
               text: 'Segue o PDF gerado.',
               files: [file]
             });
