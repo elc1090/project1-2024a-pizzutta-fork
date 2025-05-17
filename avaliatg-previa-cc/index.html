@@ -34,7 +34,6 @@
 <div class="container">
   <h3 class="bold">Avaliação de Andamento de Trabalho de Graduação</h3>
   <h4 class="bold">Ciência da Computação / UFSM</h4>
-  <p>De acordo com as <a href="https://www.ufsm.br/app/uploads/sites/425/2025/04/Normas-Internas-TGs.pdf">normas</a>, a nota de andamento abaixo representa 30% da nota final. Os 70% restantes correspondem à nota da defesa, que acontecerá no final do semestre. </p>
   <form id="evaluationForm" action="javascript:" onsubmit="generatePDF.open()" onreset="resetAllFields()">
 
     <section id="generalInformation" class="section card card-panel">
@@ -223,27 +222,10 @@
               </div>
             </div>
           </div>
-          
 
-          <!-- <div id="signatureCanvasWrapper" style="display:none;">
+          <div id="signatureSelect" class="file-field input-field" style="display:none; width: 100%; text-align: center;">
             <div class="row">
-              <div class="col s12">
-                <canvas id="signatureCanvas"></canvas>
-                <input name="signatureCanvas" type="hidden">
-              </div>
-            </div>
-            <div class="row">
-              <div class="col s12">
-                <button class="btn btn-small waves-effect waves-light indigo lighten-1" type="button" onclick="clearCanvas()">Limpar assinatura</button>
-              </div>
-              <div class="col s12">
-                <span id="signatureCanvasError" class="red-text"></span>
-              </div>
-            </div>
-          </div> -->
-          <div id="signatureSelect" class="file-field input-field" style="display:none;">
-            <div class="row">
-              <div class="col s12">
+              <div class="col s12" >
                 <img id="signaturePreview" src="#">
               </div>
             </div>

@@ -40,7 +40,7 @@ const Signature = class {
       reader.addEventListener("load", () => {
         $('#signaturePreview')
           .attr("src", reader.result)
-          .css({ display: 'block' });
+          .css({ display: 'inline' });
       });
     });
   }
