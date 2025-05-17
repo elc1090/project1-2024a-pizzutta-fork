@@ -1,72 +1,79 @@
 const Signature = class {
-
-  type = "";
-
-  canvas = $('#signatureCanvas')[0];
-  ctx = this.canvas.getContext('2d');
-
-  position = {x: 0, y: 0};
-  painting = false;
+  constructor() {
+    this.type = "";
+    this.canvas = $('#signatureCanvas')[0];
+    this.ctx = this.canvas.getContext('2d');
+    this.position = { x: 0, y: 0 };
+    this.painting = false;
+  }
 
   initialize = () => {
-    $(window).on("load", () => {
-      $(this.canvas).mousedown(this.startPainting)
-      $(this.canvas).mouseup(this.stopPainting)
-      $(this.canvas).mousemove(this.sketch)
-
-      $(this.canvas).on("touchend", (event) => this.handleTouch(event, "mouseup"))
-      $(this.canvas).on("touchstart", (event) => this.handleTouch(event, "mousedown"))
-      $(this.canvas).on("touchmove", (event) => this.handleTouch(event, "mousemove"))
-
-      $('#signatureField').change(() => {
-        const file = $('#signatureField').prop("files")[0]
-        const reader = new FileReader();
-        if (file) {
-          reader.readAsDataURL(file)
-          reader.addEventListener("load", () => {
-            $('#signaturePreview').attr("src", reader.result)
-            $('#signaturePreview').show()
-          }, false);
-        }
-      })
+    $(document).ready(() => {
+      this.bindCanvasEvents();
+      this.bindTouchEvents();
+      this.bindInputChange();
+      this.bindSignatureTypeToggle();
     });
   }
 
+  bindCanvasEvents = () => {
+    $(this.canvas).mousedown(this.startPainting);
+    $(this.canvas).mouseup(this.stopPainting);
+    $(this.canvas).mousemove(this.sketch);
+  }
+
+  bindTouchEvents = () => {
+    $(this.canvas).on("touchend", (event) => this.handleTouch(event, "mouseup"));
+    $(this.canvas).on("touchstart", (event) => this.handleTouch(event, "mousedown"));
+    $(this.canvas).on("touchmove", (event) => this.handleTouch(event, "mousemove"));
+  }
+
+  bindInputChange = () => {
+    $('#signatureField').change(() => {
+      console.log("Change triggered!");
+      const file = $('#signatureField').prop("files")[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      reader.addEventListener("load", () => {
+        $('#signaturePreview')
+          .attr("src", reader.result)
+          .css({ display: 'block' });
+      });
+    });
+  }
+
+  bindSignatureTypeToggle = () => {
+    $('input[name=signatureType]').change(this.handleSignatureTypeChange);
+  }
+
   handleSignatureTypeChange = () => {
-    this.type = $('input[name=signatureType]:checked').val()
-    switch (this.type) {
-      case "DRAW": {
-        $('#signatureCanvasWrapper').show()
-        $('#signatureSelect').hide()
-        break;
-      }
-      case "SELECT": {
-        $('#signatureSelect').show()
-        $('#signatureCanvasWrapper').hide()
-        break;
-      }
+    this.type = $('input[name=signatureType]:checked').val();
+    if (this.type === "DRAW") {
+      $('#signatureCanvasWrapper').show();
+      $('#signatureSelect').hide();
+    } else if (this.type === "SELECT") {
+      $('#signatureSelect').show();
+      $('#signatureCanvasWrapper').hide();
     }
   }
 
   handleTouch = (event, type) => {
-    event.preventDefault()
-    const touch = event.touches[0]
+    event.preventDefault();
+    const touch = event.touches[0];
     const mouseEvent = new MouseEvent(type, {
       clientX: touch.clientX,
       clientY: touch.clientY
-    })
-    this.canvas.dispatchEvent(mouseEvent)
+    });
+    this.canvas.dispatchEvent(mouseEvent);
   }
 
   getSignatureImage = () => {
-    switch (this.type) {
-      case "DRAW": {
-        return this.canvas.toDataURL("image/png")
-      }
-      case "SELECT": {
-        return $('#signaturePreview').attr("src")
-      }
-    }
+    return this.type === "DRAW"
+      ? this.canvas.toDataURL("image/png")
+      : $('#signaturePreview').attr("src");
   }
 
   getPosition = (event) => {
@@ -98,16 +105,15 @@ const Signature = class {
   }
 
   clearCanvas = () => {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
   clearPreview = () => {
-    $('#signaturePreview').attr("src", "#")
+    $('#signaturePreview').attr("src", "#");
   }
 
   isBlank = () => {
-    return !this.ctx
-      .getImageData(0, 0, this.canvas.width, this.canvas.height).data
-      .some(channel => channel !== 0);
+    const data = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height).data;
+    return !data.some(channel => channel !== 0);
   }
 }
