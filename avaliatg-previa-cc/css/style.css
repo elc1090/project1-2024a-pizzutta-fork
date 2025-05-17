@@ -149,6 +149,18 @@ canvas {
   box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
+/* Optional: make button full-width only on mobile */
+/* @media (max-width: 6600px) { */
+@media {  
+  .full-width-on-mobile {
+    display: block;
+    width: 100%;
+  }
+}
+
+.btn-left-align {
+  text-align: left !important;
+}
 
 .btn-block {
   width: 100% !important;
