@@ -152,13 +152,54 @@ const GeneratePDF = class {
       },
       signature: signature.getSignatureImage()
     }
+
+
+  }
+  downloadBlob = (blob, filename) => {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);    
   }
 
-  open = () => {
+
+
+  // open = () => {
+  //   if ($('#evaluationForm').valid()) {
+  //     const data = this.getData()
+  //     pdfMake.createPdf(this.getDefinition(data)).open();
+  //   }
+  // }
+
+  open = async () => {
     if ($('#evaluationForm').valid()) {
-      const data = this.getData()
-      pdfMake.createPdf(this.getDefinition(data)).open();
+      const data = this.getData();
+      const pdfDocGenerator = pdfMake.createPdf(this.getDefinition(data));
+  
+      pdfDocGenerator.getBlob(async (blob) => {
+        const file = new File([blob], 'ficha-avaliacao-tcc.pdf', { type: 'application/pdf' });
+  
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          try {
+            await navigator.share({
+              title: 'Ficha de Avaliação de TCC',
+              text: 'Segue o PDF gerado.',
+              files: [file]
+            });
+          } catch (error) {
+            console.warn("Sharing failed, falling back to download", error);
+            this.downloadBlob(blob, file.name);
+          }
+        } else {
+          this.downloadBlob(blob, file.name);
+        }
+      });
     }
   }
+  
 
 }
